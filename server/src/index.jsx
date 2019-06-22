@@ -4,4 +4,4 @@ import App from './views/App'
 
 const rootNode = document.querySelector('#root')
 
-hydrate(<App/>, rootNode)
+hydrate(<App />, rootNode)

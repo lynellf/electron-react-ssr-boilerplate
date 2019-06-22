@@ -1,11 +1,11 @@
 import fs from 'fs'
-import config from '../config.json'
 
 export default class Main {
-    constructor() {
-        this.staticDir = config.staticDir
-        this.bundleName = config.bundleName
-        this.port = config.port
+    constructor(config) {
+        const { staticDir, bundleName, port } = config
+        this.staticDir = staticDir
+        this.bundleName = bundleName
+        this.port = parseInt(port) | 9000
     }
 
     getBundle () {
