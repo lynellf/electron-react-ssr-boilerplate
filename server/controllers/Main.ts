@@ -1,11 +1,15 @@
 import fs from 'fs'
+import { IMain } from '../types/controllers/index'
 
-export default class Main {
-    constructor(config) {
+export default class Main implements IMain {
+    staticDir = ''
+    bundleName = ''
+    port = 9000
+    constructor(config: TConfig) {
         const { staticDir, bundleName, port } = config
         this.staticDir = staticDir
         this.bundleName = bundleName
-        this.port = parseInt(port) | 9000
+        this.port = parseInt(port)
     }
 
     getBundle () {
@@ -17,4 +21,10 @@ export default class Main {
         if (hasFile) return file[0]
         return null
     }
+}
+
+type TConfig = {
+    staticDir: string
+    bundleName: string
+    port: string
 }

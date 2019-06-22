@@ -1,5 +1,5 @@
 export default class Utils {
-    getPort() {
+    public getPort() {
         const port = localStorage.getItem('port')
         return port
     }

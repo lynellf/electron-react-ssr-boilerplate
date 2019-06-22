@@ -2,6 +2,9 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
+const nodeModules = path.resolve(__dirname, '/node_modules')
+console.log({ nodeModules })
+
 const server = {
     target: 'node',
     externals: [nodeExternals()],
@@ -14,15 +17,19 @@ const server = {
     },
     module: {
       rules: [{
-        test: /.jsx?$/,
+        test: /\.(ts|tsx)?$/,
         exclude: [
-          path.resolve(__dirname, 'node_modules')
+          path.resolve(__dirname, '/node_modules')
         ],
         loader: 'babel-loader',
+        query: {
+          presets: ["@babel/env", "@babel/typescript"],
+          plugins: ["@babel/proposal-class-properties", "@babel/proposal-object-rest-spread"]
+        }
       }]
     },
     resolve: {
-      extensions: ['.json', '.js', '.jsx']
+      extensions: ['.js', '.json', '.ts', '.tsx']
     }
   }
 
@@ -36,20 +43,15 @@ const server = {
     },
     module: {
       rules: [{
-        test: /.jsx?$/,
+        test: /\.(ts|tsx)?$/,
         exclude: [
-          path.resolve(__dirname, 'node_modules')
+          path.resolve(__dirname, '/node_modules')
         ],
         loader: 'babel-loader',
-        query: {
-          presets: [
-            ["@babel/preset-react"]
-          ]
-        }
       }]
     },
     resolve: {
-      extensions: ['.json', '.js', '.jsx']
+      extensions: ['.js', '.json', '.ts', '.tsx']
     },
     plugins: [ new CleanWebpackPlugin() ],
   }
