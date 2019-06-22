@@ -7,7 +7,7 @@ export default class Application extends Main {
     handleRoot (_req, res) {
         const { port } = this
         const jsBundle = this.getBundle()
-        const application = ReactDOMServer.renderToString(<App port={port} />)
-        res.render('index', { application, jsBundle })
+        const application = ReactDOMServer.renderToString(<App />)
+        res.render('index', { application, jsBundle, port })
     }
 }
